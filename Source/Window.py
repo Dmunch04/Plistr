@@ -18,14 +18,14 @@ class Window:
         self.Tree.heading ('#0', text = 'Name', anchor = W)
         self.Tree.heading ('one', text = 'Type', anchor = W)
         self.Tree.heading ('two', text = 'Value', anchor = W)
-        self.ItemsHolder = self.Tree.insert ('', 1, text = 'Items', values = ('Dictionary', ''))
 
     def Run (self, Items):
-        Index = 2
+        Index = 1
+        self.ItemsHolder = self.Tree.insert ('', Index, text = 'Items', values = ('Dictionary', f'({str (len (Items))} items)'))
 
         for Item in Items:
             if Item.Type.Type == 'Array':
-                ArrayHolder = self.Tree.insert (self.ItemsHolder, Index, text = Item.Name, values = (Item.Type, ''))
+                ArrayHolder = self.Tree.insert (self.ItemsHolder, Index, text = Item.Name, values = (Item.Type, f'({str (len (Item.Value.Value))} items)'))
                 NewIndex = 1
 
                 for Value in Item.Value.Value:
@@ -34,7 +34,7 @@ class Window:
                     NewIndex += 1
 
             elif Item.Type.Type == 'Dictionary':
-                DictionaryHolder = self.Tree.insert (self.ItemsHolder, Index, text = Item.Name, values = (Item.Type, ''))
+                DictionaryHolder = self.Tree.insert (self.ItemsHolder, Index, text = Item.Name, values = (Item.Type, f'({str (len (Item.Value.Value))} items)'))
                 NewIndex = 1
 
                 for Value in Item.Value.Value:
